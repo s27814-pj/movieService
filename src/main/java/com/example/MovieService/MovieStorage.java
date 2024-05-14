@@ -2,9 +2,7 @@ package com.example.MovieService;
 
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Component
 public class MovieStorage {
@@ -34,8 +32,29 @@ public class MovieStorage {
     }
 
     public Movie addMovie(Movie mov){
+        if ((mov.getCategory()==null) || (mov.getName() ==null)) throw new IllegalArgumentException("cat and name required");
         movieList.add(mov);
         return mov;
+    }
+
+    public Movie updateMovie(Movie oldMov, Movie newMov){
+        oldMov.setCategory(newMov.getCategory());
+        oldMov.setName(newMov.getName());
+        return oldMov;
+    }
+
+    public void deleteMovie(int id){
+        //movieList.removeIf(movie -> movie.getId().equals((long) id));
+        boolean wasDeleted=false;
+        Iterator<Movie> iterator = movieList.listIterator();
+        while(iterator.hasNext()){
+            if(iterator.next().getId().equals((long)id)){
+                iterator.remove();
+                wasDeleted=true;
+                break;
+            }
+        }
+        if (!wasDeleted) throw new NoSuchElementException("no movie with " + id);
     }
 
 }

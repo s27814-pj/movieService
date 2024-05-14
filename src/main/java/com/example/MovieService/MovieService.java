@@ -29,4 +29,14 @@ public class MovieService {
         movieStorage.addMovie(mov);
         return mov;
     }
+
+    public Movie updateMovie(Movie mov, int id){
+        Movie tmp = findMovieById(id)
+                .orElseThrow(() -> new NoSuchElementException("no movie with " + id));
+        return movieStorage.updateMovie(tmp, mov);
+    }
+
+    public void deleteMovie(int id){
+        movieStorage.deleteMovie(id);
+    }
 }

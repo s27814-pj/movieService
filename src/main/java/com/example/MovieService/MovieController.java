@@ -29,9 +29,25 @@ public class MovieController {
         return ResponseEntity.of(movieService.findMovieById(id));
     }
 
+//    @PostMapping("/movies")
+//    public ResponseEntity<Movie> addMovie(@RequestBody Movie movie){
+//        return ResponseEntity.ok(movieService.addMovie((new Movie(5L,movie.getName(),movie.getCategory()))));
+//        //return ResponseEntity.of(movieService.findMovieById(1));
+//    }
+
     @PostMapping("/movies")
-    public ResponseEntity<Movie> addMovie(@RequestBody Movie movie){
-        return ResponseEntity.ok(movieService.addMovie((new Movie(5L,movie.getName(),movie.getCategory()))));
-        //return ResponseEntity.of(movieService.findMovieById(1));
+    public ResponseEntity<Movie> addMovie(@RequestBody Movie movie) {
+        return ResponseEntity.ok(movieService.addMovie(new Movie(0L, movie.getName(), movie.getCategory())));
+    }
+
+    @PutMapping("/movies/{id}")
+    public ResponseEntity<Movie> updateMovie(@RequestBody Movie movie, @PathVariable(required = true) int id){
+        return ResponseEntity.ok(movieService.updateMovie(movie,id));
+    }
+
+    @DeleteMapping("movies/{id}")
+    public ResponseEntity<Void> deleteMovie(@PathVariable(required = true) int id){
+        movieService.deleteMovie(id);
+        return ResponseEntity.noContent().build();
     }
 }
