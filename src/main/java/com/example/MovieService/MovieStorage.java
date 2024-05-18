@@ -10,8 +10,8 @@ public class MovieStorage {
     private List<Movie> movieList;
 
     public MovieStorage(){
-        Movie mov1 = new Movie( 1L,"nazwa","kategoria");
-        Movie mov2 = new Movie( 11L,"nazwa2","kategoria2");
+        Movie mov1 = new Movie( 1L,"nazwa",Category.SCI_FI);
+        Movie mov2 = new Movie( 11L,"nazwa2",Category.DRAMA);
         this.movieList=new ArrayList<Movie>();
         this.movieList.add(mov1);
         this.movieList.add(mov2);

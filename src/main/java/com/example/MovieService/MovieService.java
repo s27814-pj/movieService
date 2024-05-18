@@ -12,31 +12,42 @@ import java.util.Optional;
 public class MovieService {
 
     private final MovieStorage movieStorage;
+    private final MovieRepository movieRepository;
 
-    public MovieService(MovieStorage movieStorage){
+    public MovieService(MovieStorage movieStorage, MovieRepository movieRepository) {
         this.movieStorage = movieStorage;
+        this.movieRepository = movieRepository;
     }
 
     public List<Movie> getMovieList() {
-        return movieStorage.getMovieList();
+        return movieRepository.findAll();
+        //return movieStorage.getMovieList();
     }
 
-    public Optional<Movie> findMovieById(int id){
-        return movieStorage.findMovieById((long) id);
+    public Optional<Movie> findMovieById(int id) {
+        return movieRepository.findMovieById((long)id);
+        //return movieRepository.findById((long) id);
+        //return movieStorage.findMovieById((long) id);
     }
 
-    public Movie addMovie(Movie mov){
-        movieStorage.addMovie(mov);
-        return mov;
+    public Movie addMovie(Movie mov) {
+        return movieRepository.save(mov);
+        //movieStorage.addMovie(mov);
+        //return mov;
     }
 
-    public Movie updateMovie(Movie mov, int id){
-        Movie tmp = findMovieById(id)
+    public Movie updateMovie(Movie mov, int id) {
+        //Movie tmp = findMovieById(id)
+        Movie tmp = movieRepository.findById((long)id)
                 .orElseThrow(() -> new NoSuchElementException("no movie with " + id));
-        return movieStorage.updateMovie(tmp, mov);
+        tmp.setCategory(mov.getCategory());
+        tmp.setName(mov.getName());
+        return movieRepository.save(tmp);
+        //return movieStorage.updateMovie(tmp, mov);
     }
 
-    public void deleteMovie(int id){
-        movieStorage.deleteMovie(id);
+    public void deleteMovie(int id) {
+        movieRepository.deleteById((long)id);
+        //movieStorage.deleteMovie(id);
     }
 }

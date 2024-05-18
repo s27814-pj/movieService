@@ -1,9 +1,6 @@
 package com.example.MovieService;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Movie {
@@ -11,12 +8,16 @@ public class Movie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String category;
+    @Enumerated(EnumType.STRING)
+    private Category category;
 
-    public Movie(Long id, String name, String category) {
+    public Movie(Long id, String name, Category category) {
         this.id = id;
         this.name = name;
         this.category = category;
+    }
+    public Movie(){
+
     }
 //    public Movie(String name, String category) {
 //        this.id = 5L;
@@ -40,11 +41,11 @@ public class Movie {
         this.name = name;
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 }
