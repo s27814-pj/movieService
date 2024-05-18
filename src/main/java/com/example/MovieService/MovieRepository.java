@@ -7,5 +7,6 @@ import java.util.Optional;
 
 public interface MovieRepository extends JpaRepository<Movie, Long> {
     Optional<Movie> findMovieById (Long aLong);
+    List<Movie> findAllByIdIsNotNull();
     //List<Movie> findAll();
 }

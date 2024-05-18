@@ -20,7 +20,8 @@ public class MovieService {
     }
 
     public List<Movie> getMovieList() {
-        return movieRepository.findAll();
+        return movieRepository.findAllByIdIsNotNull();
+        //return movieRepository.findAll();
         //return movieStorage.getMovieList();
     }
 
