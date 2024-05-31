@@ -50,4 +50,8 @@ public class MovieController {
         movieService.deleteMovie(id);
         return ResponseEntity.noContent().build();
     }
+    @GetMapping("/setTrue/{id}")
+    public ResponseEntity<Movie> setTrue(@PathVariable int id){
+    return ResponseEntity.ok(movieService.setTrue(id));
+    }
 }

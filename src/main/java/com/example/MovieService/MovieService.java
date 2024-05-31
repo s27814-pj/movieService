@@ -51,4 +51,10 @@ public class MovieService {
         movieRepository.deleteById((long)id);
         //movieStorage.deleteMovie(id);
     }
+    public Movie setTrue(int id){
+        Movie tmp = movieRepository.findById((long)id)
+                .orElseThrow(() -> new NoSuchElementException("no movie with " + id));
+        tmp.setAvailable(true);
+        return movieRepository.save(tmp);
+    }
 }
