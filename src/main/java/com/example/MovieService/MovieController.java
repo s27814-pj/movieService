@@ -54,4 +54,9 @@ public class MovieController {
     public ResponseEntity<Movie> setTrue(@PathVariable int id){
     return ResponseEntity.ok(movieService.setTrue(id));
     }
+
+    @GetMapping("/setFalse/{id}")
+    public ResponseEntity<Movie> setFalse(@PathVariable int id){
+        return ResponseEntity.ok(movieService.setFalse(id));
+    }
 }

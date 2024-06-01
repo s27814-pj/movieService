@@ -57,4 +57,10 @@ public class MovieService {
         tmp.setAvailable(true);
         return movieRepository.save(tmp);
     }
+    public Movie setFalse(int id){
+        Movie tmp = movieRepository.findById((long)id)
+                .orElseThrow(() -> new NoSuchElementException("no movie with " + id));
+        tmp.setAvailable(false);
+        return movieRepository.save(tmp);
+    }
 }
