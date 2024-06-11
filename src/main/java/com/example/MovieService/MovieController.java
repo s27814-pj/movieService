@@ -50,13 +50,18 @@ public class MovieController {
         movieService.deleteMovie(id);
         return ResponseEntity.noContent().build();
     }
-    @GetMapping("/setTrue/{id}")
+    @PutMapping("/setTrue/{id}")
     public ResponseEntity<Movie> setTrue(@PathVariable int id){
     return ResponseEntity.ok(movieService.setTrue(id));
     }
 
-    @GetMapping("/setFalse/{id}")
+    @PutMapping("/setFalse/{id}")
     public ResponseEntity<Movie> setFalse(@PathVariable int id){
         return ResponseEntity.ok(movieService.setFalse(id));
+    }
+
+    @GetMapping("/throw500")
+    public ResponseEntity<Exception> throw500(){
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
